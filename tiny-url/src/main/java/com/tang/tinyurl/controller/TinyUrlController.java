@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -44,16 +45,15 @@ public class TinyUrlController {
     }
  
     @GetMapping(value = "/{id}")
-    public ResponseEntity getUrl(@PathVariable final String id) {
+    public ModelAndView getUrl(@PathVariable final String id) {
         // Get from redis.
         final UrlDto urlDto = redisTemplate.opsForValue().get(id);
         if (Objects.isNull(urlDto)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new TinyUrlError("No such key exists."));
+            throw new TinyUrlError("No such key exists.");
         } else {
             log.info("URL retrieved = {}", urlDto.getUrl());
         }
- 
-        return ResponseEntity.ok(urlDto);
+        return new ModelAndView("redirect:"+urlDto.getUrl());
     }
     
 }
