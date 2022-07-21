@@ -24,10 +24,9 @@ public class RedisConfig {
      *
      * @return redisTemplate
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
     @Bean
     public RedisTemplate<String, UrlDto> redisTemplate() {
-        final Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(UrlDto.class);
+        final Jackson2JsonRedisSerializer<UrlDto> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(UrlDto.class);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
 
         final RedisTemplate<String, UrlDto> redisTemplate = new RedisTemplate<>();
