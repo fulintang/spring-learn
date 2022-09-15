@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
         System.out.println("UserService获取FansCount的线程  " + Thread.currentThread().getName());
         try {
             Thread.sleep(10000);
-            System.out.println("获取FansCount===睡眠:" + 2 + "s");
+            System.out.println("获取FansCount===睡眠:" + 10 + "s");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
