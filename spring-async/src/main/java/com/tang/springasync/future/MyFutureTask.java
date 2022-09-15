@@ -23,10 +23,10 @@ public class MyFutureTask {
     UserService userService;
 
     /**
-     * 核心线程 5 最大线程 60 保活时间60s 存储队列 1024 有守护线程 拒绝策略:将超负荷任务回退到调用者
+     * 核心线程 8 最大线程 60 保活时间60s 存储队列 1024 有守护线程 拒绝策略:将超负荷任务回退到调用者
      */
     private static final ExecutorService executor = new ThreadPoolExecutor(8, 60,
-            0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1),
+            60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1),
             new ThreadFactoryBuilder().setNameFormat("User_Async_FutureTask-%d").setDaemon(true).build(),
             new ThreadPoolExecutor.CallerRunsPolicy());
 
