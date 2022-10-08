@@ -28,7 +28,15 @@ public class WebSocketController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    }
+    
+    @PostMapping("/sentAllMessage")
+    public void sentAllMessage(String message) {
+        try {
+            webSocket.sendMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

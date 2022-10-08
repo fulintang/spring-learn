@@ -101,7 +101,8 @@ public class WebSocket {
      * 向客户端发送消息
      */
     public void sendMessage(String message) throws IOException {
-        this.session.getBasicRemote().sendText(message);
+        webSocketMap.values().forEach(ws -> ws.session.getAsyncRemote().sendText(message));
+        //this.session.getBasicRemote().sendText(message);
         //this.session.getAsyncRemote().sendText(message);
     }
 
